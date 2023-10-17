@@ -17,8 +17,8 @@ const reviewRouter = require('./routes/reviewRoutes');
 const viewRouter = require('./routes/viewRoutes');
 const bookingRouter = require('./routes/bookingRoutes');
 const compression = require('compression');
-
 const cors = require('cors');
+
 // Start express app
 const app = express();
 
@@ -28,7 +28,6 @@ app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 // 1) GLOBAL MIDDLEWARES
 // Set security HTTP headers
-app.use(cors());
 
 app.use(helmet());
 
@@ -68,6 +67,8 @@ app.use(
   })
 );
 
+app.use(cors());
+app.options('*', cors());
 // Serving static files
 app.use(express.static(path.join(__dirname, 'public')));
 
